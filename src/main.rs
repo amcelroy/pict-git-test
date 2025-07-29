@@ -15,7 +15,7 @@ use pictorus_linux::{
 use pictorus_traits::{Context as CorelibContext, GeneratorBlock};
 
 pub fn compile_info() -> &'static str {
-    return "git_test_6888d8981b7c297dc266691a version : compiled 07/29/2025 - 14:55:27";
+    return "git_test_6888d8981b7c297dc266691a version : compiled 07/29/2025 - 15:09:56";
 }
 
 #[derive(Debug, Clone)]
