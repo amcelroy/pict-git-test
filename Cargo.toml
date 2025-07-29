@@ -1,0 +1,22 @@
+[package]
+name = "git_test_6888d8981b7c297dc266691a"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.26"
+embedded-io = "0.6.1"
+log = "0.4.21"
+pictorus-block-data = { path = "/mnt/pictorus-rs/pictorus-block-data" }
+pictorus-blocks = { features = [ "std",], path = "/mnt/pictorus-rs/pictorus-blocks" }
+pictorus-internal = { features = [ "std",], path = "/mnt/pictorus-rs/pictorus-internal" }
+pictorus-linux = { path = "/mnt/pictorus-rs/pictorus-linux" }
+pictorus-traits = { path = "/mnt/pictorus-rs/pictorus-traits" }
+serde = { version = "1.0.219", default-features = false, features = [ "derive",] }
+signal-hook = "0.3.14"
+std-embedded-time = "0.1.0"
+
+[build-dependencies]
+
+[features]
+default = []
