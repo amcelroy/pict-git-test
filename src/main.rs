@@ -1,7 +1,7 @@
 extern crate alloc;
 
 use core::time::Duration;
-use pictorus_blocks::{SinewaveBlock, TrianglewaveBlock};
+use pictorus_blocks::{SinewaveBlock, SquarewaveBlock};
 use pictorus_internal::loggers::linux_logger::LinuxLogger;
 use pictorus_internal::loggers::Logger;
 use pictorus_internal::timing::{RunTime, Timing};
@@ -15,7 +15,7 @@ use pictorus_linux::{
 use pictorus_traits::{Context as CorelibContext, GeneratorBlock};
 
 pub fn compile_info() -> &'static str {
-    return "git_test_6888d8981b7c297dc266691a version : compiled 07/29/2025 - 14:55:27";
+    return "git_test_6888d8981b7c297dc266691a version : compiled 07/29/2025 - 16:34:18";
 }
 
 #[derive(Debug, Clone)]
@@ -27,8 +27,8 @@ pub struct Main66979State {
     last_time_s: f64,
     sinewave1_66975_param: <SinewaveBlock<f64> as GeneratorBlock>::Parameters,
     sinewave1_66975: SinewaveBlock<f64>,
-    trianglewave1_66977_param: <TrianglewaveBlock<f64> as GeneratorBlock>::Parameters,
-    trianglewave1_66977: TrianglewaveBlock<f64>,
+    squarewave1_b16d0_param: <SquarewaveBlock<f64> as GeneratorBlock>::Parameters,
+    squarewave1_b16d0: SquarewaveBlock<f64>,
 }
 
 impl Main66979State {
@@ -54,38 +54,45 @@ impl Main66979State {
         );
         let sinewave1_66975 = SinewaveBlock::default();
 
-        let trianglewave1_66977_amplitude = load_param::<f64>(
-            &"trianglewave1_66977",
+        let squarewave1_b16d0_amplitude = load_param::<f64>(
+            &"squarewave1_b16d0",
             &"amplitude",
             1.000000,
             &diagram_params,
         );
-        let trianglewave1_66977_frequency = load_param::<f64>(
-            &"trianglewave1_66977",
-            &"frequency",
+        let squarewave1_b16d0_on_duration = load_param::<f64>(
+            &"squarewave1_b16d0",
+            &"on_duration",
             1.000000,
             &diagram_params,
         );
-        let trianglewave1_66977_phase =
-            load_param::<f64>(&"trianglewave1_66977", &"phase", 0.000000, &diagram_params);
-        let trianglewave1_66977_bias =
-            load_param::<f64>(&"trianglewave1_66977", &"bias", 0.000000, &diagram_params);
-
-        // Trianglewave1
-        let trianglewave1_66977_param = <TrianglewaveBlock<f64> as GeneratorBlock>::Parameters::new(
-            trianglewave1_66977_amplitude,
-            trianglewave1_66977_frequency,
-            trianglewave1_66977_phase,
-            trianglewave1_66977_bias,
+        let squarewave1_b16d0_off_duration = load_param::<f64>(
+            &"squarewave1_b16d0",
+            &"off_duration",
+            1.000000,
+            &diagram_params,
         );
-        let trianglewave1_66977 = TrianglewaveBlock::default();
+        let squarewave1_b16d0_phase =
+            load_param::<f64>(&"squarewave1_b16d0", &"phase", 0.000000, &diagram_params);
+        let squarewave1_b16d0_bias =
+            load_param::<f64>(&"squarewave1_b16d0", &"bias", 0.000000, &diagram_params);
+
+        // Squarewave1
+        let squarewave1_b16d0_param = <SquarewaveBlock<f64> as GeneratorBlock>::Parameters::new(
+            squarewave1_b16d0_amplitude,
+            squarewave1_b16d0_on_duration,
+            squarewave1_b16d0_off_duration,
+            squarewave1_b16d0_phase,
+            squarewave1_b16d0_bias,
+        );
+        let squarewave1_b16d0 = SquarewaveBlock::default();
 
         Main66979State {
             last_time_s: -1.0,
             sinewave1_66975_param,
             sinewave1_66975,
-            trianglewave1_66977_param,
-            trianglewave1_66977,
+            squarewave1_b16d0_param,
+            squarewave1_b16d0,
         }
     }
 
@@ -109,13 +116,11 @@ impl Main66979State {
             .sinewave1_66975
             .generate(&self.sinewave1_66975_param, &runtime_ctx);
         context.log_data.sinewave1_66975_0(sinewave1_66975_0);
-        // Trianglewave1
-        let trianglewave1_66977_0 = self
-            .trianglewave1_66977
-            .generate(&self.trianglewave1_66977_param, &runtime_ctx);
-        context
-            .log_data
-            .trianglewave1_66977_0(trianglewave1_66977_0);
+        // Squarewave1
+        let squarewave1_b16d0_0 = self
+            .squarewave1_b16d0
+            .generate(&self.squarewave1_b16d0_param, &runtime_ctx);
+        context.log_data.squarewave1_b16d0_0(squarewave1_b16d0_0);
 
         self.last_time_s = app_time_s;
     }
@@ -143,8 +148,8 @@ struct LogData {
     pub app_time_us: Option<u64>,
     #[serde(rename = "sinewave1_66975.0")]
     pub sinewave1_66975_0: Option<f64>,
-    #[serde(rename = "trianglewave1_66977.0")]
-    pub trianglewave1_66977_0: Option<f64>,
+    #[serde(rename = "squarewave1_b16d0.0")]
+    pub squarewave1_b16d0_0: Option<f64>,
 }
 
 impl LogData {
@@ -164,8 +169,8 @@ impl LogData {
         self.sinewave1_66975_0 = Some(value);
     }
 
-    pub fn trianglewave1_66977_0(&mut self, value: f64) {
-        self.trianglewave1_66977_0 = Some(value);
+    pub fn squarewave1_b16d0_0(&mut self, value: f64) {
+        self.squarewave1_b16d0_0 = Some(value);
     }
 }
 
